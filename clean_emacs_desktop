@@ -1,0 +1,2 @@
+#!/bin/bash
+find ~ -regex ".*emacs\.desktop.*" -delete && echo "删除完成"

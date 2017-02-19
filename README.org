@@ -1,0 +1,1 @@
+#+TITLE: 家目录中的脚本文件（/home/me/bin）

@@ -1,0 +1,13 @@
+#!/bin/bash
+find ~/foo/playground \
+	 \( \
+	 -type f \
+	 -not -perm 0600 \
+	 -exec chmod 0600 '{}' ';' \
+	 \) \
+	 -or \
+	 \( \
+	 -type d \
+	 -not -perm 0700 \
+	 -exec chmod 0700 '{}' ';' \
+	 \)
