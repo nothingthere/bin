@@ -1,0 +1,24 @@
+#!/bin/bash
+# 下载可兰经诵读
+DIR=~/Music/可兰经
+
+# 确保文件夹存在
+if [ ! -d $DIR ]; then
+	mkdir -p $DIR
+fi
+
+# 进入该文件夹
+cd $DIR
+
+for i in {001..03}; do
+	file="http://www.yslzc.com/quran/Alafasi/${i}.mp3"
+	if [[ ! -e "$i.mp3" ]]; then
+		# echo $file
+		wget $file
+	fi
+done
+
+# 返回原来文件夹
+cd -
+
+echo "下载完成"

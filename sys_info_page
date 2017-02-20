@@ -1,4 +1,6 @@
 #!/bin/bash
+# 系统信息报告，可生成文本文件
+
 PROGNAME=$(basename $0)
 TITLE="$HOSTNAME系统信息报告"
 CURRENT_TIME=$(date +"%x %r %z")

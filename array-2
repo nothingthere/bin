@@ -1,0 +1,21 @@
+#!/bin/bash
+# ????
+
+# 参数错误提醒
+if [[ ! -d "$1" ]]; then
+	echo "用法：array-2 文件夹" >&2
+	exit 1
+fi
+
+# 收集数据
+declare -A files						# 所有文件的关联数组
+declare -A file_owner					# 文件拥有者关联数组
+declare -A file_group					# 用户组关联数组
+declare -A owners						# 所有用户的关联数组
+declare -A groups						# 所有用户组的关联数组
+
+function collection {
+	owner=						# 用户
+	group=						# 用户组
+
+}

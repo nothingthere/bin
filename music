@@ -1,0 +1,28 @@
+#!/bin/bash
+# 使用mplayer播放家目录中Music文件夹中的音乐文件
+
+# 确保~/Music文件夹存在且其中有音频文件
+function ensure_dir {
+    return
+}
+
+# 确保安装了mplayer播放器
+function ensure_player {
+    return
+}
+
+# 显示菜单获取播放选择
+function menu {
+    return
+}
+
+# 播放音乐文件
+function play {
+    return
+}
+
+DIR=$HOME/Music					# 文件夹
+
+if [[ ! -d $DIR ]]; then
+	echo "只能播放$DIR文件夹中的音乐文件" >&2
+fi

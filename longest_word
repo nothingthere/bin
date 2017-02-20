@@ -1,0 +1,20 @@
+#!/bin/bash
+# 获取一个或多个文件中最长的单词
+
+for i; do
+	max_len=0 						# 最长长度
+	max_word=						# 最长单词
+
+	if [[ -r $i ]]; then
+		for word in $(strings $i); do
+			len=${#word}
+			if (( len > max_len )); then
+				max_len=$len
+				max_word=$word
+			fi
+		done
+
+		# 输出结果
+		echo -e "$i：'$max_word' （$max_len）"
+	fi
+done

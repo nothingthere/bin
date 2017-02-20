@@ -1,0 +1,55 @@
+#!/bin/bash
+# 统计一天中文件访问最频繁的时段
+function usage {
+    echo "用法：${0##*/} 文件夹"
+	return
+}
+
+if [[ ! -d $1 ]]; then
+	usage >&2
+	exit 1
+fi
+
+# 初始化数组
+for i in {0..23}; do hours[i]=0; done
+file_num=0						# 文件数量
+dir_num=0						# 文件夹数量
+
+DOTS=20							# 处理多少个文件夹打印一个点
+# 收集数据
+# 递归调研，如果是文件则收集，如果为文件夹则进入其后收集，其他情况不管
+function collect_info {
+    if [[ -f $1 ]]; then
+		# echo $1
+		j=$(stat -c %y $1 | cut -c 12-13)
+		j=${j/#0}
+		((++hours[j]))
+		((++file_num))
+	elif [[ -d $1 ]]; then
+		((++dir_num))
+		# 输出点，以便知晓程序在运行
+		if ((dir_num % DOTS == 0)); then
+			printf "."
+		fi
+
+		for i in "$1"/*; do
+			collect_info $i
+		done
+	fi
+
+	return
+}
+
+printf "[计算中]"
+collect_info $1
+
+# 显示结果
+echo -e "\n时间\t文件数\t时间\t文件数"
+echo -e "----\t------\t----\t------"
+for i in {0..11}; do
+	j=$((i+12))
+	printf "%02d\t%d\t%02d\t%d\n" $i ${hours[i]} $j ${hours[j]}
+done
+
+printf "\n文件总数 = %d\n" $file_num
+printf "\n文件夹总数 = %d\n" $dir_num

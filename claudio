@@ -1,10 +1,3 @@
 #!/bin/bash
-for((i=0; i<=20; i++));do
-	remainder=$((i%5))
-	if((remainder == 0)); then
-		printf "<%d> " $i
-	else
-		printf "%d " $i
-	fi
-done
-echo
+# 用于练习的即时脚本
+( ls -l; echo "Listing of foo.txt"; cat foo.txt; ) | lpr
