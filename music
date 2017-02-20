@@ -1,28 +1,130 @@
 #!/bin/bash
 # 使用mplayer播放家目录中Music文件夹中的音乐文件
 
+DIR=$HOME/Music					# 默认存放音频文件的文件夹
+PLAYER=mplayer					# 默认播放器
+
+# 辅助函数，确保文件夹中有音频文件
+function contains_music {
+	if [[ (-d $1) && $(find $1 -regextype "posix-egrep" -regex ".*\.(mp3|mp4|ogg)$" ) ]]; then
+		echo true
+	else
+		echo false
+	fi
+}
+
 # 确保~/Music文件夹存在且其中有音频文件
 function ensure_dir {
-    return
+	# 确保文件夹存在
+	if [[ ! -d $DIR ]]; then
+		echo "默认文件夹$DIR不存在" >&2
+		exit 1
+	fi
+
+	# 确保文件夹中有音频文件.mp3或.ogg格式
+	if [[ false ==  $(contains_music $DIR) ]]; then
+		echo "$DIR中不存在可供播放的ogg或mp3文件" >&2
+		exit 1
+	fi
+
+	return
 }
 
 # 确保安装了mplayer播放器
 function ensure_player {
+	if [[ ! $(which $PLAYER) ]]; then
+		echo -e "安装播放器：$PLAYER\n"
+		sudo apt install $PLAYER
+	fi
     return
 }
 
 # 显示菜单获取播放选择
+play_list_dir=							# 存放音频文件夹的数组
+play_list_single=						# 存放不在某个文件夹中单个文件的数组
+dir_index=0				# 文件夹数组索引
+single_index=0				# 单个文件数组索引
+
 function menu {
-    return
+	clear
+	# 初始化数组
+	for i in $DIR/*; do
+		# 如果是存放有音频的文件夹
+		if [[ true == $(contains_music $i) ]]; then
+			play_list_dir[((dir_index++))]="$i"
+		fi
+
+		# 如果是单个音频文件
+		if [[ -f $i && $i =~ .*\.(mp3|mp4|ogg)$ ]]; then
+			play_list_single[((single_index++))]="$i"
+		fi
+	done
+
+	# 显示菜单
+
+	echo -e "\033[1;34m播放选择：\033[0m"
+
+	for (( i=0; i < dir_index; i++ )); do
+		printf "\t\033[0;32m%d) %s\033[0m\n" $i ${play_list_dir[i]##*/}
+	done
+
+	if (( single_index > 0 )); then
+		echo -e "\t$((dir_index))) 单个文件："
+		for (( i=0; i < single_index; i++ )); do
+			# 最多显示3个单个文件
+			if (( i > 2 )); then
+				echo -e "\t\t..."
+				break
+			fi
+
+			printf "\t\t%s\n" ${play_list_single[i]##*/}
+		done
+	fi
+
+	echo -e "\tq) 退出"
+	# 获取选择
+	echo
+	read -p "> "
+
+	# echo "验证前\$REPLY = $REPLY \$dir_index=$dir_index"
+	# 验证输入，如果不正确则重新调用菜单（menu）函数
+	if [[ !($REPLY =~ [0-9q]) ]]; then
+		echo "输入错误"
+		sleep 3
+		menu
+	fi
+	if [[ $REPLY == "q" || $REPLY == "Q" ]]; then
+		echo "再见！"
+		exit
+	fi
+
+	if (($REPLY < 0 )) || (($REPLY > $dir_index )); then
+		echo "数字范围错误"
+		sleep 3
+		menu
+	fi
+
+	return
 }
 
 # 播放音乐文件
 function play {
-    return
+
+	if (( $REPLY == $dir_index ));then
+		for song in $play_list_single; do
+			mplayer $song
+		done
+	else
+		cd  ${play_list_dir[$REPLY]}
+		mplayer *
+		cd -
+	fi
+
+	return
 }
 
-DIR=$HOME/Music					# 文件夹
-
-if [[ ! -d $DIR ]]; then
-	echo "只能播放$DIR文件夹中的音乐文件" >&2
-fi
+# 开始执行
+ensure_dir
+ensure_player
+menu
+play
