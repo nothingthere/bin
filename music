@@ -1,4 +1,5 @@
 #!/bin/bash
+# FIXME: 没解决重复打印的问题
 # 使用mplayer播放家目录中Music文件夹中的音乐文件
 
 DIR=$HOME/Music					# 默认存放音频文件的文件夹
