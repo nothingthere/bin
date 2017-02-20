@@ -57,7 +57,7 @@ function menu {
 
 		# 如果是单个音频文件
 		if [[ -f $i && $i =~ .*\.(mp3|mp4|ogg)$ ]]; then
-			play_list_single[((single_index++))]="$i"
+ 			play_list_single[((single_index++))]="$i"
 		fi
 	done
 
@@ -99,7 +99,7 @@ function menu {
 		exit
 	fi
 
-	if (($REPLY < 0 )) || (($REPLY > $dir_index )); then
+	if (($REPLY < 0 )) || (($REPLY >= $dir_index )); then
 		echo "数字范围错误"
 		sleep 3
 		menu
@@ -111,11 +111,11 @@ function menu {
 # 播放音乐文件
 function play {
 
-	if (( $REPLY == $dir_index ));then
+	if (( $REPLY == $dir_index ));then # 单个文件
 		for song in $play_list_single; do
 			mplayer $song
 		done
-	else
+	else						# 各个文件夹
 		cd  ${play_list_dir[$REPLY]}
 		mplayer *
 		cd -
