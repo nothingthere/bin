@@ -1,0 +1,13 @@
+#!/bin/bash
+# 将文本转换为蓝色
+
+function usage {
+	echo "${0##*/} 文本"
+	exit 1
+}
+
+if [[ ! $1 ]]; then
+	usage
+else
+	printf "\033[0;34m%s\033[0;0m" $1
+fi

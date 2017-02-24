@@ -10,7 +10,7 @@ fi
 # 进入该文件夹
 cd $DIR
 
-for i in {001..03}; do
+for i in {001..002}; do
 	file="http://www.yslzc.com/quran/Alafasi/${i}.mp3"
 	if [[ ! -e "$i.mp3" ]]; then
 		# echo $file

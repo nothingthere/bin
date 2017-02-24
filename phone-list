@@ -1,0 +1,79 @@
+#!/bin/bash
+# 存储和查看电话号码
+# 格式：姓名 电话号码 说明
+# 一个姓名可有多个号码，但不能有2条姓名和电话号码都相同
+# 功能：
+# 添加电话号码： phone-list -a|--add  姓名 电话号码 [说明]
+# 查看电话号码： phone-list -l|--list 正则
+# 删除电话号码： phone-list -d|--delet 正则
+
+function usage {
+	cat <<EOF
+添加电话号码： phone-list -a|--add  姓名 电话号码 [说明]
+查看电话号码： phone-list -l|--list 正则
+删除电话号码： phone-list -d|--delet 正则
+EOF
+	return
+}
+
+FILE=$HOME/.phone-list.txt			# 存储电话号码的文件
+
+# 确保存储文件存在
+if [[ ! -e $FILE ]]; then
+	touch $FILE
+	chmod 700 $FILE
+fi
+
+# 验证函数
+# 验证是否为正确的手机号码格式
+function validate-num {
+	echo "验证电话号码"
+	local regex=^1[0-9]{10}$
+	# echo $1
+	# echo $regex
+	if [[ ! $1 =~ $regex ]]; then
+		echo "$1：电话号码格式有误"
+		exit 1
+	fi
+
+	return
+}
+
+function validate-name {
+	echo "验证姓名"
+	return
+}
+
+function validate-notes {
+	echo "验证说明信息"
+	return
+}
+
+# 添加函数
+function add-num {
+	echo "添加电话号码"
+	return
+}
+# 列举函数
+function list-num {
+	echo "列举电话号码"
+	return
+}
+# 删除函数
+function delete-num {
+	echo "删除电话号码"
+	return
+}
+
+# 获取参数
+# case $1 in
+# 	-a|--add) add-num $2 $3 $4
+# 			  ;;
+# 	-l|--list) list-num $2
+# 			   ;;
+# 	-d|--delete) delete-num $2
+# 				 ;;
+# 	*) usage >&2
+# 	   exit 1
+# 	   ;;
+# esac
