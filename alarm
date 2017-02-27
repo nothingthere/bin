@@ -1,0 +1,32 @@
+#!/bin/bash
+# 利用sleep命令实现闹
+DEFAULT_SOUND=~/Music/豆瓣/All-Your-Love.mp3					# 默认声音文件
+sound=$DEFAULT_SOUND			# 声音文件
+CURRENT_TIME=$(date +"%X")
+# 用法提示
+function usage {
+	echo "${0##*/} \"sleep命令参数\" [声音文件路径]" >&2
+	exit 1
+}
+
+# 确定参数（用于sleep命令的参数，以及指定文件夹的参数）
+if [[ -z $1 ]]; then
+	usage
+fi
+
+# 确定声音文件存在
+# 是否更改默认声音文件
+if [[ -n $2 ]]; then
+	sound=$2
+fi
+
+if [[ ! -e $sound ]]; then
+	echo "声音文件'$sound'不存在" >&2
+	exit 1
+fi
+
+# echo $sound
+echo $(yellow "闹钟开启") @${CURRENT_TIME:0:8}
+echo '...'
+sleep "$1"
+mplayer $sound

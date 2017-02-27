@@ -1,3 +1,13 @@
 #!/bin/bash
 # 用于练习的即时脚本
-( ls -l; echo "Listing of foo.txt"; cat foo.txt; ) | lpr
+# read -p "数组：" -a array
+# array=(a b c)
+X=2
+
+for ((i=0;i < X; i++));do
+	array[i]=$i
+done
+
+for ((i=0;i < X; i++));do
+	echo ${array[i]}
+done

@@ -1,0 +1,51 @@
+#!/bin/bash
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+# if (( $(id -u) == 0 )); then
+# 	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# fi
+# 别名
+alias ll='ls -lht --reverse'
+alias la='ls -A'
+alias l='ls -CF'
+alias e='emacs -nw'
+
+#让emamcs图形界面支持中文输入
+# 加入此条配置后会使用Emacs中进入info模式下时出现费字符。
+# export LC_CTYPE=zh_CN.UTF-8
+
+#支持Emacs命令行主题一致
+# export TERM=xterm-256color
+
+## git 别名
+alias gd='git diff'
+alias gstatus='git status'
+alias gcommit='git add . && git commit -m'
+alias gpush='git push origin master'
+alias gdiff='git diff'
+
+# 关机
+alias tired='sudo shutdown now'
+
+# 备份
+alias backup='sudo mkdir -p /media/claudio/BACKUP && sudo rsync -av --delete /home/claudio /media/claudio/BACKUP'
+
+# 装逼，模仿《黑客军团》中将工具新建一个文件夹放入~/tools文件夹中
+export PATH=~/tools:"$PATH"
+
+# 更新系统
+alias update='sudo apt update ; sudo apt upgrade'
+alias clean='sudo apt autoremove ; sudo apt autoclean'
+# 显示家目录内存使用
+ds () {
+	cat <<EOF
+$HOSTNAME 内存使用：
+
+EOF
+
+	df -h
+}
+
+# 使用bash -x参数时显示行号
+
+export PS4='$LINENO + '
