@@ -1,5 +1,5 @@
 #!/bin/bash
-# 将文本转换为蓝色
+# 将文本转换为绿色
 
 function usage {
 	echo "${0##*/} 文本"
@@ -9,5 +9,5 @@ function usage {
 if [[ ! $1 ]]; then
 	usage
 else
-	printf "\033[0;34m%s\033[0;0m" "$1"
+	printf "\033[0;32m%s\033[0;0m" "$1"
 fi

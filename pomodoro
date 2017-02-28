@@ -1,0 +1,21 @@
+#!/bin/bash
+# pomodoro 脚本实现
+# 依赖：本地脚本“alarm”
+# 原理：无限循环闹钟
+
+SOUND_ON_WORK="Bitch, it's time to work"					# 开始工作时的响铃
+SOUND_ON_REST="You master, it's time to have a rest"					# 开始休息的响铃
+WORK_DURATION=10m				# 工作时长（分钟数）
+REST_DURATION=20m			# 休息时长（分钟数）
+
+echo $(brown "番茄工作法开启，Have Fun ${USER^}！")
+
+while true; do
+	spd-say "$SOUND_ON_WORK"
+	echo $(blue "开始工作")
+	sleep $WORK_DURATION
+
+	spd-say "$SOUND_ON_REST"
+	echo $(green "开始休息")
+	sleep $REST_DURATION
+done
