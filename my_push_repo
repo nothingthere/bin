@@ -1,0 +1,7 @@
+#!/bin/bash
+if [[ -d ".git" ]]; then
+	echo $(pwd)
+	git status
+else
+	echo "不是git项目根目录" >&2
+fi
