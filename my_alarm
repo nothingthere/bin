@@ -2,7 +2,7 @@
 # 利用sleep命令实现闹
 DEFAULT_SOUND=~/Music/豆瓣/All-Your-Love.mp3					# 默认声音文件
 sound=$DEFAULT_SOUND			# 声音文件
-CURRENT_TIME=$(date +"%X")
+CURRENT_TIME=$(date +"%T")
 # 用法提示
 function usage {
 	echo "${0##*/} \"sleep命令参数\" [声音文件路径]" >&2
