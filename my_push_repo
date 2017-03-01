@@ -1,7 +1,12 @@
 #!/bin/bash
 if [[ -d ".git" ]]; then
 	echo $(pwd)
-	git status
+	if [[ $(echo  $(echo $(git status)) | grep "modified") ]]; then
+		echo "无需跟新"
+		exit
+	else
+		echo "需跟新"
+	fi
 else
-	echo "不是git项目根目录" >&2
+	echo $(my_yellow "不是git项目根目录") >&2
 fi
