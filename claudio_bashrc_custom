@@ -21,8 +21,10 @@ alias e='emacs -nw'
 # alias gdiff='git diff'
 
 # 关机
-alias tired='sudo poweroff'
-
+function tired {
+    echo -n "洗洗睡吧！输入密码关键："
+	sudo poweroff
+}
 # 备份
 alias backup='sudo mkdir -p /media/claudio/BACKUP && sudo rsync -av --delete /home/claudio /media/claudio/BACKUP'
 
