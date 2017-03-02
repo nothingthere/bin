@@ -1,1 +1,26 @@
 #+TITLE: 家目录中的脚本文件（/home/me/bin）
+* 命名格式：
+
+  所有脚本名前加“claudio_”前缀。
+* 各脚本简介（按字母顺序）
+
+** [[file:claudio_alarm][claudio_alarm（简易闹钟程序）]]
+
+** [[file:claudio_bashrc_custom][claudio_bashrc_custom]]
+
+   本地环境定制文件，需在.bashrc文件后添加如下代码后生效：
+
+   #+BEGIN_SRC shell-script
+     # 使自己的配置文件生效
+     if [ -f "$HOME/bin/claudio_bashrc_custom" ]; then
+         . "$HOME/bin/claudio_bashrc_custom"
+     fi
+   #+END_SRC
+
+** claudio_[blue|brown|yellow...] （为字符串添加颜色）
+
+** [[file:claudio_clean_emacs_desktop][claudio_delete_emacs_desktop]]
+
+   当emacs缓存文件发生冲突时，删除所有.emacs.desktop.*文件
+
+** ...
