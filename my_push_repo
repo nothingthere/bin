@@ -1,11 +1,25 @@
 #!/bin/bash
 function usage {
-    echo "用法：${$0##*/} [-m|--message ]"
+    echo "用法：${0##*/} [-m --message | -h --help]"
 }
 
 message="日常跟新"
 
-# 处理参数，如果指定
+# 处理参数，如果指定commit字符串
+while [[ -n $1 ]]; do
+	case $1 in
+		-m|--message) shift
+					  message="$1"
+					  ;;
+		-h|--help) usage
+				   exit
+				   ;;
+		*) usage >&2
+		   exit 1
+	esac
+	shift
+done
+
 if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 	# echo $(pwd)
 	if [[ -z $(git diff) ]]; then # 如果无修改
