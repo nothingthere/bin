@@ -1,22 +1,12 @@
 #!/bin/bash
-#apt install fcitx-table-wbpy fcitx-googlepinyin
-#sudo apt install libopencc2 fcitcx-libs fcitx-libs-qt
-sudo apt install -y nodejs
+echo "重装系统后的安装配置"
 
-sudo apt install golang
+echo "nodejs环境搭建"
 
-sudo apt install tlp tlp-rdw
-# sudo sensors-detect
+echo "安装go语言"
 
-sudo apt install lm-sensors chromium
-# sudo tlp start
+echo "安装lantern"
 
-# sudo apt install chromium
+echo "安装ruby"
 
-# sudo npm i gulp-cli -g
-# sudo dpkg -i ***lanten.deb
-sudo apt install libappindicator3-1
-
-sudo apt install ruby-full rubygems
-sudo gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
-sudo su -c "gem install sass"
+echo "安装sass"
