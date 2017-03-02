@@ -27,9 +27,11 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 		echo $(my_brown "无需跟新")
 		exit
 	else
+		# 显示跟新内容
 		echo $(my_green "跟新的内容有：")
 		git status
 
+		# 确认跟新的交互
 		echo -n $(my_green "是否推送到github上？(yes/no)： ")
 		read
 
@@ -49,4 +51,5 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 	fi
 else
 	echo $(my_yellow "不是git项目根目录") >&2
+	exit 1
 fi
