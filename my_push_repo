@@ -1,4 +1,5 @@
 #!/bin/bash
+# 简单化项目日常提交，将git add . ; git commit -m "..." ; git push origin master 一步完成
 function usage {
     echo "用法：${0##*/} [-m --message | -h --help]"
 }
@@ -28,7 +29,7 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 		exit
 	else
 		# 显示跟新内容
-		echo $(my_green "跟新的内容有：")
+		echo $(my_green "需更新的内容有：")
 		git status
 
 		# 确认跟新的交互
@@ -42,9 +43,9 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 					 git commit -m "$message"
 					 echo $(my_green "向远程推送...")
 					 git push origin master
-					 echo $(my_green "远程跟新结束！")
+					 echo $(my_green "远程更新结束！")
 					 ;;
-			*) echo $(my_green "再见，不跟新算求")
+			*) echo $(my_green "再见，不更新算求")
 			   exit
 			   ;;
 		esac
