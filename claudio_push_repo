@@ -47,7 +47,7 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 		case $REPLY in
 			y|Y|yes) echo $(claudio_green "添加所有更改...")
 					 git add .
-					 echo $(claudio_green "使用git commit '$message' Commit")
+					 echo $(claudio_green "使用git commit '$message' Commit..")
 					 git commit -m "$message"
 					 echo $(claudio_green "远程推送...")
 					 git push origin master
