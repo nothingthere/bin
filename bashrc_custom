@@ -1,10 +1,6 @@
 #!/bin/bash
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
-# if (( $(id -u) == 0 )); then
-# 	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-# fi
-# 别名
 alias ll='ls -lht --reverse'
 alias la='ls -A'
 alias l='ls -CF'
@@ -18,14 +14,14 @@ alias e='emacs -nw'
 # export TERM=xterm-256color
 
 ## git 别名
-alias gd='git diff'
-alias gstatus='git status'
-alias gcommit='git add . && git commit -m'
-alias gpush='git push origin master'
-alias gdiff='git diff'
+# alias gd='git diff'
+# alias gstatus='git status'
+# alias gcommit='git add . && git commit -m'
+# alias gpush='git push origin master'
+# alias gdiff='git diff'
 
 # 关机
-alias tired='sudo shutdown now'
+alias tired='sudo poweroff'
 
 # 备份
 alias backup='sudo mkdir -p /media/claudio/BACKUP && sudo rsync -av --delete /home/claudio /media/claudio/BACKUP'
