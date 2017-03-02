@@ -1,16 +1,19 @@
 #!/bin/bash
 # 简单化项目日常提交，将git add . ; git commit -m "..." ; git push origin master 一步完成
 function usage {
-    echo "用法：${0##*/} [-m --message | -h --help]"
+    echo "用法：${0##*/} [-m --message | -v --verbose | -h --help]"
 }
 
-message="日常跟新"
+message="日常跟新"				# 用于commit的字符串
+verbose=false					# 是否使用git diff命令查看更改情况（不使用默认的git status）
 
 # 处理参数，如果指定commit字符串
 while [[ -n $1 ]]; do
 	case $1 in
 		-m|--message) shift
 					  message="$1"
+					  ;;
+		-v|--verbose) verbose=true
 					  ;;
 		-h|--help) usage
 				   exit
@@ -30,7 +33,12 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 	else
 		# 显示跟新内容
 		echo $(claudio_green "需更新的内容有：")
-		git status
+		# echo "\$verbose = $verbose" # TEST
+		if $verbose ; then
+			git diff
+		else
+			git status
+		fi
 
 		# 确认跟新的交互
 		echo -n $(claudio_green "是否推送到github上？(yes/no)： ")
@@ -45,7 +53,7 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 					 git push origin master
 					 echo $(claudio_green "远程更新结束，再见！")
 					 ;;
-			*) echo $(claudio_green "再见，不更新算求")
+			*) echo $(claudio_green "再见，不更新算逑！")
 			   exit
 			   ;;
 		esac
