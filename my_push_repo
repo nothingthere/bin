@@ -16,6 +16,7 @@ while [[ -n $1 ]]; do
 				   ;;
 		*) usage >&2
 		   exit 1
+		   ;;
 	esac
 	shift
 done
@@ -27,13 +28,14 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 		exit
 	else
 		echo "需跟新"
-		echo "添加所有更改："
+		git status
+		echo "添加所有更改..."
 		git add .
 		echo "使用git commit '$message' Commit"
 		git commit -m "$message"
-		echo "向远程推送"
+		echo "向远程推送..."
 		git push origin master
-		echo "远程跟新结束"
+		echo "远程跟新结束！"
 	fi
 else
 	echo $(my_yellow "不是git项目根目录") >&2
