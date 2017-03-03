@@ -5,10 +5,6 @@
 DIR=$HOME/Music					# 默认存放音频文件的文件夹
 PLAYER=mplayer					# 默认播放器
 
-function quit_prompt {
-	echo -n "Q键退出： "
-}
-
 # 辅助函数，确保文件夹中有音频文件
 function contains_music {
 	if [[ (-d $1) && $(find $1 -regextype "posix-egrep" -regex ".*\.(mp3|mp4|ogg)$" ) ]]; then
@@ -31,8 +27,6 @@ function ensure_dir {
 		echo "$DIR中不存在可供播放的ogg或mp3文件" >&2
 		exit 1
 	fi
-
-	return
 }
 
 # 确保安装了mplayer播放器
@@ -46,92 +40,85 @@ function ensure_player {
 
 # 显示菜单获取播放选择
 play_list_dir=							# 存放音频文件夹的数组
-play_list_single=						# 存放不在某个文件夹中单个文件的数组
 dir_index=0				# 文件夹数组索引
-single_index=0				# 单个文件数组索引
 
-function menu {
-	clear
-	# 初始化数组
+# 获取含音乐文件的文件夹，并初始化play_list_dir和dir_index变量
+function get_music_dirs {
+	# 重置数组
+    dir_index=0
+	# for((i=0; i < "${play_list_dir[@]}"; i++)); do
+	# 	play_list_dir[$i]="";
+	# done
+
+	#获取音乐文件夹
 	for i in $DIR/*; do
 		# 如果是存放有音频的文件夹
 		if [[ true == $(contains_music $i) ]]; then
 			play_list_dir[((dir_index++))]="$i"
-		fi
-
-		# 如果是单个音频文件
-		if [[ -f $i && $i =~ .*\.(mp3|mp4|ogg)$ ]]; then
- 			play_list_single[((single_index++))]="$i"
+			# echo $i 				# TEST
 		fi
 	done
 
-	# 显示菜单
+	# 按字母顺序排序歌单
+	play_list_dir=($(for i in "${play_list_dir[@]}"; do echo "$i"; done | sort --reverse))
 
-	echo -e "\033[1;34m播放选择：\033[0m"
+}
 
+function hint_select {
+    echo "输入错误，正确选项为[0-$((dir_index - 1))]或'q'"
+}
+
+function menu {
+	clear
+	echo $(claudio_color --color light-blue "播放列表：")
 	for (( i=0; i < dir_index; i++ )); do
-		printf "\t\033[0;32m%d) %s\033[0m\n" $i ${play_list_dir[i]##*/}
+		printf "\t%s) %s\n" $i $(claudio_color --color green "${play_list_dir[i]##*/}")
 	done
+	echo -e "\tq) 退出\n"
 
-	if (( single_index > 0 )); then
-		echo -e "\t$((dir_index))) 单个文件："
-		for (( i=0; i < single_index; i++ )); do
-			# 最多显示3个单个文件
-			if (( i > 2 )); then
-				echo -e "\t\t..."
-				break
-			fi
-
-			printf "\t\t%s\n" ${play_list_single[i]##*/}
-		done
-	fi
-
-	echo -e "\tq) 退出"
-	# 获取选择
-	echo
-	read -p "> "
-
-	# echo "验证前\$REPLY = $REPLY \$dir_index=$dir_index"
-	# 验证输入，如果不正确则重新调用菜单（menu）函数
-	if [[ !($REPLY =~ [0-9q]) ]]; then
-		echo "输入错误"
-		sleep 3
-		menu
-	fi
-	if [[ $REPLY == "q" || $REPLY == "Q" ]]; then
-		echo "再见！"
-		exit
-	fi
-
-	if (($REPLY < 0 )) || (($REPLY >= $dir_index )); then
-		echo "数字范围错误"
-		sleep 3
-		menu
-	fi
-
-	return
 }
 
 # 播放音乐文件
 function play {
+	ensure_dir
+	ensure_player
+	# 每次调研play函数时都重新读取文件夹
+	# 使得播放过程中添加文件夹，跟换播放文件夹后可见
+	get_music_dirs
+	menu
+	# 获取选择
 
-	if (( $REPLY == $dir_index ));then # 单个文件
-		for song in $play_list_single; do
-			quit_prompt
-			mplayer $song  1>& /dev/null
-		done
-	else						# 各个文件夹
-		cd  ${play_list_dir[$REPLY]}
-		quit_prompt
-		mplayer * 1>& /dev/null
-		cd -
-	fi
+	# echo "验证前\$REPLY = $REPLY \$dir_index=$dir_index" # TEST
+	# 验证输入
+	while true; do
+		echo -n $(claudio_color --color blue "请选择：")
+		read
+		case $REPLY in
+			[[:digit:]])
+				if (($REPLY < 0 )) || (($REPLY >= $dir_index )); then
+					hint_select
+				else
+					break
+				fi
+				;;
+			q|Q) exit
+				 ;;
+			*) hint_select
+			   ;;
+		esac
+	done
 
-	return
+	local dir="${play_list_dir[REPLY]}"
+
+	for music in $dir/*; do
+		echo "正在播放：$music ..."
+		echo "q)" $(claudio_color --color green "下一曲")
+		$PLAYER "$music" 1>& /dev/null
+
+	done
+
+	play						# 重复播放
+
 }
 
-# 开始执行
-ensure_dir
-ensure_player
-menu
 play

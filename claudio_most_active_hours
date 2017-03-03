@@ -48,7 +48,7 @@ echo -e "\n时间\t文件数\t时间\t文件数"
 echo -e "----\t------\t----\t------"
 for i in {0..11}; do
 	j=$((i+12))
-	printf "%02d\t%d\t%02d\t%d\n" $i ${hours[i]} $j ${hours[j]}
+	printf "%02s\t%d\t%02s\t%d\n" $(claudio_color --color green "$i") ${hours[i]} $(claudio_color --color green "$j") ${hours[j]}
 done
 
 printf "\n文件总数 = %d\n" $file_num
