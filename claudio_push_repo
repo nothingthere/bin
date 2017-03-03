@@ -28,11 +28,11 @@ done
 if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 	# echo $(pwd)
 	if [[ -z $(git diff) ]]; then # 如果无修改
-		echo $(claudio_brown "无需跟新")
+		echo $(claudio_color --color brown "无需跟新")
 		exit
 	else
 		# 显示跟新内容
-		echo $(claudio_green "需更新的内容有：")
+		echo $(claudio_color --color green "需更新的内容有：")
 		# echo "\$verbose = $verbose" # TEST
 		if $verbose ; then
 			git diff
@@ -41,24 +41,24 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 		fi
 
 		# 确认跟新的交互
-		echo -n $(claudio_green "是否推送到github上？(yes/no)： ")
+		echo -n $(claudio_color --color green "是否推送到github上？(yes/no)： ")
 		read
 
 		case $REPLY in
-			y|Y|yes) echo $(claudio_green "添加所有更改...")
+			y|Y|yes) echo $(claudio_color --color green "添加所有更改...")
 					 git add .
-					 echo $(claudio_green "使用git commit '$message' Commit..")
+					 echo $(claudio_color --color green "使用git commit '$message' Commit..")
 					 git commit -m "$message"
-					 echo $(claudio_green "远程推送...")
+					 echo $(claudio_color --color green "远程推送...")
 					 git push origin master
-					 echo $(claudio_green "远程更新结束，再见！")
+					 echo $(claudio_color --color green "远程更新结束，再见！")
 					 ;;
-			*) echo $(claudio_green "再见，不更新算逑！")
+			*) echo $(claudio_color --color green  "再见，不更新算逑！")
 			   exit
 			   ;;
 		esac
 	fi
 else
-	echo $(claudio_yellow "不是git项目根目录") >&2
+	echo $(claudio_color --color yellow "不是git项目根目录") >&2
 	exit 1
 fi

@@ -27,9 +27,9 @@ fi
 
 # echo $sound
 spd-say --voice-type female3 --rate 0 "Clock on"
-echo $(claudio_yellow "闹钟开启") @${CURRENT_TIME:0:8}
+echo $(claudio_color --color yellow "闹钟开启") @${CURRENT_TIME:0:8}
 echo '...'
 sleep "$1"
-echo "q)退出"
+echo $(claudio_color --color yellow "q)退出")
 
 mplayer $sound 1>& /dev/null

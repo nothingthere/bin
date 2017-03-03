@@ -16,15 +16,15 @@ function print_current_time {
 	printf "%s" $(date +"%T")
 }
 
-echo $(claudio_brown "番茄工作法开启。Have Fun ${USER^}！")
+echo $(claudio_color --color brown "番茄工作法开启。Have Fun ${USER^}！")
 
 while true; do
 	printf "\n"
 	say "$SOUND_ON_WORK"
-	printf "%s @%s\n" $(claudio_blue "开始工作") $(print_current_time)
+	printf "%s @%s\n" $(claudio_color --color blue "开始工作") $(print_current_time)
 	sleep $WORK_DURATION
 
 	say "$SOUND_ON_REST"
-	printf "%s @%s\n" $(claudio_green "开始休息") $(print_current_time)
+	printf "%s @%s\n" $(claudio_color --color green "开始休息") $(print_current_time)
 	sleep $REST_DURATION
 done

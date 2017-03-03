@@ -2,6 +2,7 @@
 * 命名格式：
 
   所有脚本名前加“claudio_”前缀。
+
 * 各脚本简介（按字母顺序）
 
 ** [[file:claudio_alarm][claudio_alarm（简易闹钟程序）]]
@@ -17,8 +18,8 @@
      fi
    #+END_SRC
 
-** claudio_[blue|brown|yellow...] （为字符串添加颜色）
-
+** [[file:claudio_color][claudio_color]]
+   将字符串转变为不同颜色
 ** [[file:claudio_clean_emacs_desktop][claudio_delete_emacs_desktop]]
 
    当emacs缓存文件发生冲突时，删除所有.emacs.desktop.*文件

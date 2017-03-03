@@ -5,6 +5,10 @@
 DIR=$HOME/Music					# 默认存放音频文件的文件夹
 PLAYER=mplayer					# 默认播放器
 
+function quit_prompt {
+	echo -n "Q键退出： "
+}
+
 # 辅助函数，确保文件夹中有音频文件
 function contains_music {
 	if [[ (-d $1) && $(find $1 -regextype "posix-egrep" -regex ".*\.(mp3|mp4|ogg)$" ) ]]; then
@@ -113,11 +117,13 @@ function play {
 
 	if (( $REPLY == $dir_index ));then # 单个文件
 		for song in $play_list_single; do
-			mplayer $song
+			quit_prompt
+			mplayer $song  1>& /dev/null
 		done
 	else						# 各个文件夹
 		cd  ${play_list_dir[$REPLY]}
-		mplayer *
+		quit_prompt
+		mplayer * 1>& /dev/null
 		cd -
 	fi
 
