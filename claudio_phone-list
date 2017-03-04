@@ -35,8 +35,6 @@ function validate-num {
 		echo "$1：电话号码格式有误"
 		exit 1
 	fi
-
-	return
 }
 
 function validate-name {
@@ -50,24 +48,26 @@ function validate-notes {
 }
 
 # 添加函数
-function add-num {
+function add {
 	echo "添加电话号码"
 	return
 }
-# 列举函数
-function list-num {
-	echo "列举电话号码"
+
+# 删除函数
+function remove {
+	echo "删除电话号码"
 	return
 }
-# 删除函数
-function delete-num {
-	echo "删除电话号码"
+
+# 列举函数
+function select {
+	echo "列举电话号码"
 	return
 }
 
 # 获取参数
 # case $1 in
-# 	-a|--add) add-num $2 $3 $4
+# 	-a|--add) add $2 $3 $4
 # 			  ;;
 # 	-l|--list) list-num $2
 # 			   ;;

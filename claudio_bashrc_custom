@@ -15,10 +15,10 @@ alias e='emacs -nw'
 
 ## git 别名
 # alias gd='git diff'
-# alias gstatus='git status'
-# alias gcommit='git add . && git commit -m'
-# alias gpush='git push origin master'
-# alias gdiff='git diff'
+alias gstatus='git status'
+alias gcommit='git add . && git commit -m'
+alias gpush='git push origin master'
+alias gdiff='git diff'
 
 # 关机
 function tired {

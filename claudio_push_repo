@@ -4,7 +4,7 @@ function usage {
     echo "用法：${0##*/} [-m --message | -v --verbose | -h --help]"
 }
 
-message="日常跟新"				# 用于commit的字符串
+message="日常更新"				# 用于commit的字符串
 verbose=false					# 是否使用git diff命令查看更改情况（不使用默认的git status）
 
 # 处理参数，如果指定commit字符串
@@ -28,10 +28,11 @@ done
 if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 	# echo $(pwd)
 	if [[ -z $(git diff) ]]; then # 如果无修改
-		echo $(claudio_color --color brown "无需跟新")
+		# 删除文件和添加文件时，使用git diff无法检测
+		echo $(claudio_color --color brown "无需更新，可能只是添加个删除了文件!")
 		exit
 	else
-		# 显示跟新内容
+		# 显示更新内容
 		echo $(claudio_color --color green "需更新的内容有：")
 		# echo "\$verbose = $verbose" # TEST
 		if $verbose ; then
@@ -40,18 +41,19 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 			git status
 		fi
 
-		# 确认跟新的交互
+		# 确认更新的交互
 		echo -n $(claudio_color --color green "是否推送到github上？(yes/no)： ")
 		read
 
 		case $REPLY in
 			y|Y|yes) echo $(claudio_color --color green "添加所有更改...")
 					 git add .
-					 echo $(claudio_color --color green "使用git commit '$message' Commit..")
+					 echo $(claudio_color --color green "使用git commit '$message' Commit...")
 					 git commit -m "$message"
 					 echo $(claudio_color --color green "远程推送...")
-					 git push origin master
-					 echo $(claudio_color --color green "远程更新结束，再见！")
+					 if $(git push origin master); then
+						 echo $(claudio_color --color green "远程更新结束，再见！")
+					 fi
 					 ;;
 			*) echo $(claudio_color --color green  "再见，不更新算逑！")
 			   exit
