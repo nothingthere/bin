@@ -22,7 +22,8 @@ alias gdiff='git diff'
 
 # 关机
 function tired {
-    echo -n "洗洗睡吧！输入密码关键："
+	clear
+	echo $(claudio_color --color green "洗洗睡吧！")
 	sudo poweroff
 }
 # 备份
