@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# 进制转换脚本
+
+function usage {
+    cat <<EOF
+用法：${0##*/} -b|--base n X
+将数字“X”转换为“n”进制的数
+EOF
+}
+
+# 是否为合法数字
+function is_num {
+
+	return false
+}
+base=10 						# 默认转换结果为10进制
+
+# 处理参数
+# 参数必须为3个
+
+# 开始转换

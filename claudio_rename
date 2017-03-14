@@ -2,8 +2,8 @@
 # 删除文件名中空格 批量移动 或批量重命名
 # 此后的代码根据不同情况需手动更新 ####### 使用"##!!!标记"
 
-DIR=~/Music/古琴
-DEST_DIR=~/Music/古琴 			###!!!
+DIR=~/dwhelper
+DEST_DIR=~/Music/U2 			###!!!
 mkdir -p $DEST_DIR
 
 # 删除文件名中的空格
@@ -11,9 +11,9 @@ for file in $(find $DIR -regextype "posix-egrep" -regex ".*(mp4|mp3|ogg|avi|mkv)
 	orgin_name=$(echo $file | sed 's/@/ /g') # 再将原来的空格弄回来，获得原始文件名
 	# echo "$orgin_name"						 # TEST
 	newname=$(echo $file | sed 's/@/-/g')		   # 将空格的部分替换为横线
-	# newname=$(echo $newname | sed 's/正在播放//g')  ###!!!
+	newname=$(echo $newname | sed 's/正在播放//g')  ###!!!
 	# newname=$(echo $newname | sed 's/豆瓣//g')		###!!!
-	# newname=$(echo $newname | sed -E 's/-\(\)//')
+	newname=$(echo $newname | sed -E 's/-\(\)//')
 	# echo $newname									# TEST
 	# echo $orgin_name			# TEST
 
