@@ -98,8 +98,8 @@ function play {
 		echo -n $(claudio_color --color blue "请选择：")
 		read
 		case $REPLY in
-			[[:digit:]])
-				if (($REPLY < 0 )) || (($REPLY >= $dir_index )); then
+			[[:digit:]]*)
+				if ((REPLY < 0 )) || ((REPLY >= dir_index )); then
 					hint_select
 				else
 					break
