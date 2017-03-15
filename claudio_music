@@ -70,11 +70,15 @@ function hint_select {
 
 function menu {
 	clear
+	local items_per_line=5		# 每行打印多少项
 	echo $(claudio_color --color light-blue "播放列表：")
 	for (( i=0; i < dir_index; i++ )); do
-		printf "\t%s) %s\n" $i $(claudio_color --color green "${play_list_dir[i]##*/}")
+		if (( (i % items_per_line) == 0)); then
+			printf "\n"
+		fi
+		printf "%2s) %10s\t" $i $(claudio_color --color green "${play_list_dir[i]##*/}")
 	done
-	echo -e "\tq) 退出\n"
+	printf "\n\nq) 退出\n\n"
 
 }
 
