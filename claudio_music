@@ -59,6 +59,12 @@ function get_music_dirs {
 		fi
 	done
 
+	# 如果没有音乐文件夹，直接退出
+	if ((dir_index <= 0 )); then
+		echo "$DIR文件夹中无音乐文件夹！"
+		exit
+	fi
+
 	# 按字母顺序排序歌单
 	play_list_dir=($(for i in "${play_list_dir[@]}"; do echo "$i"; done | sort --reverse))
 
