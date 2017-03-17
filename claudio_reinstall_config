@@ -1,12 +1,17 @@
 #!/bin/bash
-echo "重装系统后的安装配置"
+echo "重装系统后的安装配置..."
 
-echo "nodejs环境搭建"
+echo "配置git..."
 
-echo "安装go语言"
+# 解决中文文件名使用byte字符显示的问题
+git config --global core.quotepath false
 
-echo "安装lantern"
+echo "nodejs环境搭建..."
 
-echo "安装ruby"
+echo "安装go语言..."
 
-echo "安装sass"
+echo "安装lantern..."
+
+echo "安装ruby..."
+
+echo "安装sass..."
