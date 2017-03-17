@@ -42,7 +42,7 @@ if [[ -d ".git" ]]; then 		# 如果是git项目根目录
 		fi
 
 		# 确认更新的交互
-		echo -n $(claudio_color --color green "是否推使用\"$message\"\"送到github上？(yes/no)： ")
+		echo -n $(claudio_color --color green "是否推使用\"$message\"送到github上？(yes/no)： ")
 		read
 
 		case $REPLY in
