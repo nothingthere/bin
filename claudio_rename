@@ -3,7 +3,7 @@
 # 此后的代码根据不同情况需手动更新 ####### 使用"##!!!标记"
 
 DIR=~/dwhelper
-DEST_DIR=~/Music/山人乐队 			###!!!
+DEST_DIR=~/Music/久石让 			###!!!
 mkdir -p $DEST_DIR
 
 # 删除文件名中的空格
@@ -12,7 +12,7 @@ for file in $(find $DIR -regextype "posix-egrep" -regex ".*(mp4|mp3|ogg|avi|mkv)
 	# echo "$orgin_name"						 # TEST
 	newname=$(echo $file | sed 's/@/-/g')		   # 将空格的部分替换为横线
 	newname=$(echo $newname | sed 's/正在播放//g')  ###!!!
-	newname=$(echo $newname | sed 's/-山人乐队//g')		###!!!
+	newname=$(echo $newname | sed 's/-久石让//g')		###!!!
 	# newname=$(echo $newname | sed -E 's/-\(\)//')
 	# echo $newname									# TEST
 	# echo $orgin_name			# TEST

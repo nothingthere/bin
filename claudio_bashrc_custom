@@ -4,7 +4,6 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 alias ll='ls -lht --reverse'
 alias la='ls -A'
 alias l='ls -CF'
-alias e='emacs -nw'
 
 #让emamcs图形界面支持中文输入
 # 加入此条配置后会使用Emacs中进入info模式下时出现费字符。
@@ -48,3 +47,10 @@ EOF
 # 使用bash -x参数时显示行号
 
 export PS4='$LINENO + '
+
+# 关于emacs的配置
+function install_emacs {
+    sudo apt install emacs25 emacs25-common-non-dfsg
+}
+
+alias e='emacs25 -nw'
