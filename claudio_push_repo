@@ -40,13 +40,7 @@ function in_repo_dir {
     fi
 }
 
-# if in_repo_dir; then
-#     echo "yes"
-# else
-#     echo "no"
-# fi
-
-if in_repo_dir; then 		# 如果是git项目根目录
+if in_repo_dir; then 		# 如果在git目录中
     # 显示更新内容
     echo $(claudio_color --color green "需更新的内容有：")
     # echo "\$verbose = $verbose" # TEST
