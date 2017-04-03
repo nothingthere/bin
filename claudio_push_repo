@@ -25,49 +25,57 @@ while [[ -n $1 ]]; do
 	shift
 done
 
-# 鉴定当前文件夹是否为git项目根目录的标准
-function find_repo_root_dir {
+# 判断当前文件夹是否为git项目中文件夹
+function in_repo_dir {
     if [[ -d '.git' ]]; then
-        return true
-    elif [[ $PWD == "/home/$USERNAME" ]]; then
-        exit false
+        # echo "if $PWD"
+        return 0
+    elif [[ $PWD == '/' ]]; then
+        # echo "else $PWD"
+        return 1
     else
+        # echo "向上一级搜索...$PWD"
         cd ..
-        find_repo_root_dir
+        in_repo_dir
     fi
 }
 
-old_dir=$PWD
+# if in_repo_dir; then
+#     echo "yes"
+# else
+#     echo "no"
+# fi
 
-if [[ find_repo_root_dir ]]; then 		# 如果是git项目根目录
-	# 显示更新内容
-	echo $(claudio_color --color green "需更新的内容有：")
-	# echo "\$verbose = $verbose" # TEST
-	if $verbose ; then
-		git diff
-	else
-		git status
-	fi
+if in_repo_dir; then 		# 如果是git项目根目录
+    # 显示更新内容
+    echo $(claudio_color --color green "需更新的内容有：")
+    # echo "\$verbose = $verbose" # TEST
+    if $verbose ; then
+        git diff
+    else
+        git status
+    fi
 
-	# 确认更新的交互
-	echo -n $(claudio_color --color green "是否推使用'$message'推送到github上？(yes/no)： ")
-	read
+    # 确认更新的交互
+    echo -n $(claudio_color --color green "是否推使用'$message'推送到github上？(yes/no)： ")
+    read
 
-	case $REPLY in
-		y|Y|yes) echo $(claudio_color --color green "添加所有更改...")
-				 git add .
-				 echo $(claudio_color --color green "使用git commit '$message' Commit...")
-				 git commit -m "$message"
-				 echo $(claudio_color --color green "远程推送...")
-				 if $(git push origin master); then
-					 echo $(claudio_color --color green "远程更新结束，再见！")
-				 fi
-				 ;;
-		*) echo $(claudio_color --color green  "再见，不更新算逑！")
-		   exit
-		   ;;
-	esac
-
+    case $REPLY in
+        y|Y|yes) echo $(claudio_color --color green "添加所有更改...")
+		         git add .
+		         echo $(claudio_color --color green "使用git commit '$message' Commit...")
+		         git commit -m "$message"
+		         echo $(claudio_color --color green "远程推送...")
+		         if $(git push origin master); then
+			         echo $(claudio_color --color green "远程更新结束，再见！")
+		         fi
+		         ;;
+        *) echo $(claudio_color --color green  "再见，不更新算逑！")
+           exit
+           ;;
+    esac
+    echo "\$status=$status"
+    echo "是git项目文件."
     cd $old_dir
 else
 	echo $(claudio_color --color yellow "不是git项目根目录") >&2
