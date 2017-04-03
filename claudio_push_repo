@@ -75,6 +75,6 @@ if in_repo_dir; then
            ;;
     esac
 else
-	echo $(claudio_color --color yellow "不在git项目目录下！") >&2
+	echo $(claudio_color --color yellow "不在git项目目录下，你个SB！") >&2
 	exit 1
 fi
