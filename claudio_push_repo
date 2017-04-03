@@ -68,7 +68,7 @@ if [[ find_repo_root_dir ]]; then 		# 如果是git项目根目录
 		   ;;
 	esac
 
-    cd old_dir
+    cd $old_dir
 else
 	echo $(claudio_color --color yellow "不是git项目根目录") >&2
 	exit 1
