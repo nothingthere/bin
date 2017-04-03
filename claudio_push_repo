@@ -25,41 +25,50 @@ while [[ -n $1 ]]; do
 	shift
 done
 
-if [[ -d ".git" ]]; then 		# 如果是git项目根目录
-	# echo $(pwd)
-	if [[ -z $(git diff) ]]; then # 如果无修改
-		# 删除文件和添加文件时，使用git diff无法检测
-		echo $(claudio_color --color brown "无需更新，可能只是添加个删除了文件!")
-		exit
+# 鉴定当前文件夹是否为git项目根目录的标准
+function find_repo_root_dir {
+    if [[ -d '.git' ]]; then
+        return true
+    elif [[ $PWD == "/home/$USERNAME" ]]; then
+        exit false
+    else
+        cd ..
+        find_repo_root_dir
+    fi
+}
+
+old_dir=$PWD
+
+if [[ find_repo_root_dir ]]; then 		# 如果是git项目根目录
+	# 显示更新内容
+	echo $(claudio_color --color green "需更新的内容有：")
+	# echo "\$verbose = $verbose" # TEST
+	if $verbose ; then
+		git diff
 	else
-		# 显示更新内容
-		echo $(claudio_color --color green "需更新的内容有：")
-		# echo "\$verbose = $verbose" # TEST
-		if $verbose ; then
-			git diff
-		else
-			git status
-		fi
-
-		# 确认更新的交互
-		echo -n $(claudio_color --color green "是否推使用'$message'推送到github上？(yes/no)： ")
-		read
-
-		case $REPLY in
-			y|Y|yes) echo $(claudio_color --color green "添加所有更改...")
-					 git add .
-					 echo $(claudio_color --color green "使用git commit '$message' Commit...")
-					 git commit -m "$message"
-					 echo $(claudio_color --color green "远程推送...")
-					 if $(git push origin master); then
-						 echo $(claudio_color --color green "远程更新结束，再见！")
-					 fi
-					 ;;
-			*) echo $(claudio_color --color green  "再见，不更新算逑！")
-			   exit
-			   ;;
-		esac
+		git status
 	fi
+
+	# 确认更新的交互
+	echo -n $(claudio_color --color green "是否推使用'$message'推送到github上？(yes/no)： ")
+	read
+
+	case $REPLY in
+		y|Y|yes) echo $(claudio_color --color green "添加所有更改...")
+				 git add .
+				 echo $(claudio_color --color green "使用git commit '$message' Commit...")
+				 git commit -m "$message"
+				 echo $(claudio_color --color green "远程推送...")
+				 if $(git push origin master); then
+					 echo $(claudio_color --color green "远程更新结束，再见！")
+				 fi
+				 ;;
+		*) echo $(claudio_color --color green  "再见，不更新算逑！")
+		   exit
+		   ;;
+	esac
+
+    cd old_dir
 else
 	echo $(claudio_color --color yellow "不是git项目根目录") >&2
 	exit 1
