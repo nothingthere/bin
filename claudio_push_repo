@@ -40,7 +40,13 @@ function in_repo_dir {
     fi
 }
 
-if in_repo_dir; then 		# 如果在git目录中
+if in_repo_dir; then
+    # 如果没有跟新项目，则直接退出
+    if [[ -n $(git status | grep 'clean') ]]; then
+        # echo $(git status | grep 'clean')
+        echo "无需更新，再见！"
+        exit 0
+    fi
     # 显示更新内容
     echo $(claudio_color --color green "需更新的内容有：")
     # echo "\$verbose = $verbose" # TEST
