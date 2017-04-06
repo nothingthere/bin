@@ -1,0 +1,4 @@
+#!/bin/bash
+# 判断程序是否安装
+
+dpkg --list | awk '{print $2}' | grep "^$1$"

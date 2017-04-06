@@ -5,7 +5,7 @@ alias ll='ls -lht --reverse'
 alias la='ls -A'
 alias l='ls -CF'
 
-#让emamcs图形界面支持中文输入
+# 让emamcs图形界面支持中文输入
 # 加入此条配置后会使用Emacs中进入info模式下时出现费字符。
 # export LC_CTYPE=zh_CN.UTF-8
 
@@ -25,6 +25,7 @@ function tired {
 	echo $(claudio_color --color green "洗洗睡吧！")
 	sudo poweroff
 }
+
 # 备份
 alias backup='sudo mkdir -p /media/claudio/BACKUP && sudo rsync -av --delete /home/claudio /media/claudio/BACKUP'
 
