@@ -26,6 +26,9 @@ while [[ -n $1 ]]; do
 done
 
 # 判断当前文件夹是否为git项目中文件夹
+# 每个bash脚本应该使用自己的subshell，所以不会改变命令行中的$PWD参数
+# 所以cd ..后，命令行中的当前路径并不会改变
+# 不过：是否函数也有自己的subshell，不然这里为何没改变执行git操作的路径？
 function in_repo_dir {
     if [[ -d '.git' ]]; then
         # echo "if $PWD"
