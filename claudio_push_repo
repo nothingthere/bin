@@ -42,7 +42,7 @@ function in_repo_dir {
 
 if in_repo_dir; then
     # 如果没有跟新项目，则直接退出
-    if [[ -n $(git status | grep 'clean') ]]; then
+    if [[ -n $(git status | grep 'nothing to commit, working tree clean') ]]; then
         # echo $(git status | grep 'clean')
         echo "无需更新，再见！"
         exit 0
