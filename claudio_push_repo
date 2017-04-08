@@ -45,41 +45,43 @@ function in_repo_dir {
 
 if in_repo_dir; then
     # 如果没有跟新项目，则直接退出
-    local gstatus=$(git status)
-
-    if [[ -n $(echo $gstatus | grep 'nothing to commit, working tree clean') ]]; then
+    GSTATUS=$(git status)
+    # echo $gstatus
+    if [[ -n $(echo $GSTATUS | grep 'nothing to commit, working tree clean') ]]; then
         # echo $(git status | grep 'clean')
         echo "无需更新，再见！"
         exit 0
-    fi
-
-    # 显示更新内容
-    echo $(claudio_color --color green "需更新的内容有：")
-    # echo "\$verbose = $verbose" # TEST
-    if $verbose ; then
-        git diff
     else
-        git status
+        echo $(echo $GSTATUS | grep 'nothing to')
     fi
 
-    # 确认更新的交互
-    echo -n $(claudio_color --color green "是否推使用'$message'推送到github上？(yes/no)： ")
-    read
+    # # 显示更新内容
+    # echo $(claudio_color --color green "需更新的内容有：")
+    # # echo "\$verbose = $verbose" # TEST
+    # if $verbose ; then
+    #     git diff
+    # else
+    #     git status
+    # fi
 
-    case $REPLY in
-        y|Y|yes) echo $(claudio_color --color green "添加所有更改...")
-		         git add .
-		         echo $(claudio_color --color green "使用git commit '$message' Commit...")
-		         git commit -m "$message"
-		         echo $(claudio_color --color green "远程推送...")
-		         if $(git push origin master); then
-			         echo $(claudio_color --color green "远程更新结束，再见！")
-		         fi
-		         ;;
-        *) echo $(claudio_color --color green  "再见，不更新算逑！")
-           exit
-           ;;
-    esac
+    # # 确认更新的交互
+    # echo -n $(claudio_color --color green "是否推使用'$message'推送到github上？(yes/no)： ")
+    # read
+
+    # case $REPLY in
+    #     y|Y|yes) echo $(claudio_color --color green "添加所有更改...")
+	# 	         git add .
+	# 	         echo $(claudio_color --color green "使用git commit '$message' Commit...")
+	# 	         git commit -m "$message"
+	# 	         echo $(claudio_color --color green "远程推送...")
+	# 	         if $(git push origin master); then
+	# 		         echo $(claudio_color --color green "远程更新结束，再见！")
+	# 	         fi
+	# 	         ;;
+    #     *) echo $(claudio_color --color green  "再见，不更新算逑！")
+    #        exit
+    #        ;;
+    # esac
 else
 	echo $(claudio_color --color yellow "不在git项目目录下，你个SB！") >&2
 	exit 1
