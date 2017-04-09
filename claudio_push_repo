@@ -50,7 +50,7 @@ function repo_pushable {
 
     # 如果没有跟新项目，则直接退出
     if [[ -n $(echo $gstatus | grep 'nothing to commit, working tree clean') ]]; then
-        echo "无需更新，再见！"
+        echo "无需更新！"
         return 1
     fi
 
@@ -59,12 +59,11 @@ function repo_pushable {
         echo "可能有使用Emacs编辑未保存的文件。请检查先！"
         return 1
         # else
-        # echo $GSTATUS
+        # echo $gstatus
         # echo "无未保存文件  "
     fi
 
     return 0
-
 }
 
 if in_repo_dir && repo_pushable; then
