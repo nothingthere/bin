@@ -54,8 +54,8 @@ function repo_pushable {
         return 1
     fi
 
-    # 如果有使用Emacs未保存的文件，即文件名有"#...#"，则提醒，不跟新，并退出
-    if [[  "$gstatus" =~ (.*\.#.* |.*~) ]]; then
+    # 如果有使用Emacs未保存的文件，即文件名有".#..."或"..~"或"#...#"形式，则提醒，不跟新，并退出
+    if [[  "$gstatus" =~ (.*\.#.*|.*~|.*#.*#) ]]; then
         echo "可能有使用Emacs编辑未保存的文件。请检查先！"
         return 1
         # else
