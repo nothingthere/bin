@@ -35,6 +35,7 @@ function in_repo_dir {
         return 0
     elif [[ $PWD == '/' ]]; then
         # echo "else $PWD"
+        echo "不在项目下，你个SB"
         return 1
     else
         # echo "向上一级搜索...$PWD"
@@ -65,8 +66,8 @@ function repo_pushable {
     return 0
 
 }
-if in_repo_dir && repo_pushable; then
 
+if in_repo_dir && repo_pushable; then
     # 显示更新内容
     echo $(claudio_color --color green "需更新的内容有：")
     # echo "\$verbose = $verbose" # TEST
@@ -95,6 +96,6 @@ if in_repo_dir && repo_pushable; then
            ;;
     esac
 else
-	echo $(claudio_color --color yellow "不在git项目目录下，你个SB！") >&2
+	echo $(claudio_color --color yellow "再见！") >&2
 	exit 1
 fi
