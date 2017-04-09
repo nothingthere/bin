@@ -125,7 +125,6 @@ function play {
 		echo -e "q)\t" $(claudio_color --color green "下一曲")
 		echo -e "空格)\t" $(claudio_color --color green "暂停")
 		$PLAYER "$music" 1>& /dev/null
-
 	done
 
 	play						# 重复播放

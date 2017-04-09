@@ -43,23 +43,29 @@ function in_repo_dir {
     fi
 }
 
-if in_repo_dir; then
-    GSTATUS=$(git status)
+# 当前项目能否commit和push
+function repo_pushable {
+    local gstatus=$(git status)
 
     # 如果没有跟新项目，则直接退出
-    if [[ -n $(echo $GSTATUS | grep 'nothing to commit, working tree clean') ]]; then
+    if [[ -n $(echo $gstatus | grep 'nothing to commit, working tree clean') ]]; then
         echo "无需更新，再见！"
-        exit 1
+        return 1
     fi
 
     # 如果有使用Emacs未保存的文件，即文件名有"#...#"，则提醒，不跟新，并退出
-    if [[  "$GSTATUS" =~ (.*\.#.* |.*~) ]]; then
+    if [[  "$gstatus" =~ (.*\.#.* |.*~) ]]; then
         echo "可能有使用Emacs编辑未保存的文件。请检查先！"
-        exit 1
+        return 1
         # else
         # echo $GSTATUS
         # echo "无未保存文件  "
     fi
+
+    return 0
+
+}
+if in_repo_dir && repo_pushable; then
 
     # 显示更新内容
     echo $(claudio_color --color green "需更新的内容有：")
