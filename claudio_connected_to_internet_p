@@ -1,0 +1,12 @@
+#!/bin/bash
+# 判断是否联网
+# Author: Claudio <3261958605@qq.com>
+# Created: 2017-04-11 21:16:40
+# Commentary:
+# 参考地址：http://stackoverflow.com/questions/929368/how-to-test-an-internet-connection-with-bash
+# 疑问：不清楚原理，也不知道是不是只能连接路由器，不能连外网也行。
+# Code:
+
+ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` &> /dev/null
+
+exit

@@ -45,7 +45,7 @@ case $REPLY in
 esac
 
 # 跟新程序源
-if [[ ! $(apt-get update) && $(uname --kernel-release) =~ '.*Kali.*' ]]; then
+if [[ (! $(apt-get update)) && $(uname --kernel-release) =~ '.*Kali.*' ]]; then
     echo "软件源跟新失败，可能是Kali/etc/apt/sources.list的源不合适"
     exit 1
 fi
@@ -63,19 +63,19 @@ INSTALL git
 cd ~claudio
 git config --global user.name 'nothingthere'
 git config --global user.email '3261958605@qq.com'
-ssh-keygen -t rsa -C '3261958605@qq.com'
-post_message+=('需手动将~/.ssh/id_rsa.pub中的内容粘贴到GitHub的配置中。')
+# ssh-keygen -t rsa -C '3261958605@qq.com'
+# post_message+=('需手动将~/.ssh/id_rsa.pub中的内容粘贴到GitHub的配置中。')
 cd -
 ########################################
 
 ########################################
-2. 安装Emacs，以及相应依赖程序
+# 2. 安装Emacs，以及相应依赖程序
 INSTALL emacs24 emacs24-common-non-dfsg emacs25 emacs25-common-non-dfsg\
         silversearcher-ag aspell clang-format
 ########################################
 
 ########################################
-3. python3及pip3
+# 3. python3及pip3
 INSTALL python3 python3-pip python3-jedi pylint
 pip3 install autopep8
 ########################################

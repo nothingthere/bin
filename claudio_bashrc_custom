@@ -4,13 +4,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 alias ll='ls -lht --reverse'
 alias la='ls -A'
 alias l='ls -CF'
-
-# 让emamcs图形界面支持中文输入
-# 加入此条配置后会使用Emacs中进入info模式下时出现费字符。
-# export LC_CTYPE=zh_CN.UTF-8
-
-#支持Emacs命令行主题一致
-# export TERM=xterm-256color
+alias file_size='du --summarize --human-readable'
 
 ## git 别名
 # alias gd='git diff'
@@ -27,3 +21,9 @@ export PS4='$LINENO + '
 
 # Emacs
 alias e='emacs24 -nw'
+# 让emamcs图形界面支持中文输入
+# 加入此条配置后会使用Emacs中进入info模式下时出现费字符。
+# export LC_CTYPE=zh_CN.UTF-8
+
+#支持Emacs命令行主题一致
+# export TERM=xterm-256color

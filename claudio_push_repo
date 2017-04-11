@@ -1,5 +1,10 @@
 #!/bin/bash
 # 简单化项目日常提交，将git add . ; git commit -m "..." ; git push origin master 一步完成
+if ! claudio_connected_to_internet_p; then
+    echo $(claudio_color --color yellow "没联网，不能提交!")
+    exit 1
+fi
+
 function usage {
     echo "用法：${0##*/} [-m --message | -v --verbose | -h --help]"
 }
@@ -81,15 +86,16 @@ if in_repo_dir && repo_pushable; then
     read
 
     case $REPLY in
-        y|Y|yes) echo $(claudio_color --color green "添加所有更改...")
-		         git add .
-		         echo $(claudio_color --color green "使用git commit '$message' Commit...")
-		         git commit -m "$message"
-		         echo $(claudio_color --color green "远程推送...")
-		         if $(git push origin master); then
-			         echo $(claudio_color --color green "远程更新结束，再见！")
-		         fi
-		         ;;
+        y|Y|yes)
+            echo $(claudio_color --color green "添加所有更改...")
+		    git add .
+		    echo $(claudio_color --color green "使用git commit '$message' Commit...")
+		    git commit -m "$message"
+		    echo $(claudio_color --color green "远程推送...")
+		    if git push origin master; then
+			    echo $(claudio_color --color green "远程更新结束，再见！")
+		    fi
+		    ;;
         *) echo $(claudio_color --color green  "再见，不更新算逑！")
            exit
            ;;

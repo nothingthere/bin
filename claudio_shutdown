@@ -1,0 +1,13 @@
+#!/bin/bash
+# 关机，并在之前备份系统
+# Author: Claudio <3261958605@qq.com>
+# Created: 2017-04-11 20:22:11
+# Commentary:
+# Code:
+clear
+
+echo  $(claudio_color --color green "准备关机...")
+
+claudio_sys_backup && sudo poweroff
+
+exit
