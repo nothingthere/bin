@@ -5,10 +5,17 @@
 # Commentary:
 # Code:
 
-if claudio_connected_to_internet_p; then
-    spd-say "yes, connected"
-else
-    spd-say "no, not connected"
-fi
+function ping_until_connected {
+    if ! claudio_connected_to_internet_p; then
+        spd-say "no, not connected"
+        echo "重试..."
+        sleep 5
+        ping_until_connected
+    else
+        spd-say "yes, connected"
+        echo $(claudio_color --color yellow "连接成功！")
+    fi
+}
 
+ping_until_connected
 exit
