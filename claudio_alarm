@@ -33,3 +33,5 @@ sleep "$1"
 echo $(claudio_color --color yellow "q)退出")
 
 mplayer $sound 1>& /dev/null
+
+exit

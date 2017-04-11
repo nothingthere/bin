@@ -57,3 +57,5 @@ for file in $(find $DIR -regextype "posix-egrep" -regex ".*(mp4|mp3|ogg|avi|mkv)
 		mv --interactive "$orgin_name" "$dest_dir/${newname##*/}"
 	fi
 done
+
+exit

@@ -28,3 +28,5 @@ while true; do
 	printf "%s @%s\n" $(claudio_color --color green "开始休息") $(print_current_time)
 	sleep $REST_DURATION
 done
+
+exit

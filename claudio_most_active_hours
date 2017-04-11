@@ -53,3 +53,5 @@ done
 
 printf "\n文件总数 = %d\n" $file_num
 printf "\n文件夹总数 = %d\n" $dir_num
+
+exit

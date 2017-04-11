@@ -18,3 +18,5 @@ for i; do
 		echo -e "$i：'$max_word' （$max_len）"
 	fi
 done
+
+exit

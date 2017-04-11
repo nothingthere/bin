@@ -22,3 +22,5 @@ done
 cd -
 
 echo "下载完成"
+
+exit

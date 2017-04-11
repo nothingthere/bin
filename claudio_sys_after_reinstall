@@ -1,0 +1,129 @@
+#!/bin/bash
+# 重装系统后的配置，也可用于更新所有自己安装的程序
+# Author: Claudio <3261958605@qq.com>
+# Created: 2017-04-10 16:18:43
+# Commentary:
+# Code:
+
+# 为方便起见，只有root用户才能执行此脚本
+if (( $UID != 0 )); then
+    echo '只有root用户才能执行此脚本'
+    exit 1
+fi
+
+# 使脚本中可使用alias
+shopt -s expand_aliases
+
+# 安装deb包，第一个参数为包名，第二个参数为下载地址
+function install_deb {
+    local deb=
+    cd /tmp
+    wget $2
+    deb=$(ls | grep "$1.*deb")  # ???
+
+    if [[ -n $deb ]]; then
+        dpkg --install "$deb"
+        cd -
+        return 0
+    else
+        echo "没有找到 /tmp/$deb 安装包"
+        cd -
+        return 1
+    fi
+}
+
+# install_deb lantern 'https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-beta-64-bit.deb' # TEST
+
+# 先确定已新建用户claudio
+read -p "确定已经创建用户claudio(y/n)： "
+case $REPLY in
+    n|N) echo "请先创建用户claudio"
+         exit 1
+         ;;
+    *) echo "开始跟新程序源..."
+       ;;
+esac
+
+# 跟新程序源
+if [[ ! $(apt-get update) && $(uname --kernel-release) =~ '.*Kali.*' ]]; then
+    echo "软件源跟新失败，可能是Kali/etc/apt/sources.list的源不合适"
+    exit 1
+fi
+
+# # 所有交互默认YES
+alias INSTALL='apt-get install --assume-yes'
+# # INSTALL silversearcher-ag     # TEST
+
+# 安装完成后的手动操作提示信息，使用数组
+declare -a post_message
+
+########################################
+# 1. 安装git，并简单配置
+INSTALL git
+cd ~claudio
+git config --global user.name 'nothingthere'
+git config --global user.email '3261958605@qq.com'
+ssh-keygen -t rsa -C '3261958605@qq.com'
+post_message+=('需手动将~/.ssh/id_rsa.pub中的内容粘贴到GitHub的配置中。')
+cd -
+########################################
+
+########################################
+2. 安装Emacs，以及相应依赖程序
+INSTALL emacs24 emacs24-common-non-dfsg emacs25 emacs25-common-non-dfsg\
+        silversearcher-ag aspell clang-format
+########################################
+
+########################################
+3. python3及pip3
+INSTALL python3 python3-pip python3-jedi pylint
+pip3 install autopep8
+########################################
+
+########################################
+# 4. 输入法
+INSTALL fcitx-table-wbpy fcitx-googlepinyin
+post_message+=('在语言设置中讲键盘输入方式改为fcitx')
+post_message+=('手动下载sogou输入法.deb包，并安装：http://pinyin.sogou.com/linux/')
+########################################
+
+########################################
+# 5. nodejs
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+INSTALL nodejs
+npm install gulp-cli --global
+########################################
+
+########################################
+# 6. golang
+INSTALL golang
+########################################
+
+########################################
+# 7. 墙
+install_deb lantern 'https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-beta-64-bit.deb'
+########################################
+
+########################################
+# 8. 系统优化
+INSTALL tlp tlp-rdw lm-sensors
+tlp start
+sensors-detect --auto
+########################################
+
+########################################
+# 9. 多媒体
+INSTALL mplayer
+########################################
+
+########################################
+# 10. 其他
+INSTALL jq
+########################################
+
+# 输出手动信息
+for i in "${post_message[@]}";do
+    echo -e "\n$i"
+done
+
+exit

@@ -98,3 +98,5 @@ else
 	echo $(claudio_color --color yellow "再见！") >&2
 	exit 1
 fi
+
+exit

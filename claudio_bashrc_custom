@@ -19,39 +19,11 @@ alias gcommit='git add . && git commit -m'
 alias gpush='git push origin master'
 alias gdiff='git diff'
 
-# 关机
-function tired {
-	clear
-	echo $(claudio_color --color green "洗洗睡吧！")
-	sudo poweroff
-}
-
-# 备份
-alias backup='sudo mkdir -p /media/claudio/BACKUP && sudo rsync -av --delete /home/claudio /media/claudio/BACKUP'
-
 # 装逼，模仿《黑客军团》中将工具新建一个文件夹放入~/tools文件夹中
 export PATH=~/tools:"$PATH"
 
-# 更新系统
-alias update='sudo apt update ; sudo apt upgrade'
-alias clean='sudo apt autoremove ; sudo apt autoclean'
-# 显示家目录内存使用
-ds () {
-	cat <<EOF
-$HOSTNAME 内存使用：
-
-EOF
-
-	df -h
-}
-
 # 使用bash -x参数时显示行号
-
 export PS4='$LINENO + '
 
-# 关于emacs的配置
-function install_emacs {
-    sudo apt install emacs25 emacs25-common-non-dfsg
-}
-
+# Emacs
 alias e='emacs24 -nw'

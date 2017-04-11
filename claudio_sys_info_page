@@ -152,3 +152,5 @@ if [[ -n $filename ]]; then
 else
 	write_html_page
 fi
+
+exit

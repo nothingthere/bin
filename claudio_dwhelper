@@ -1,13 +1,13 @@
 #!/bin/bash
 # 将使用Firfox插件dwhelper插件下载来的音乐文件，批量重命名
 
-DIR=~/dwhelper                  # 原来文件位置
-dest_dir=                       # 新位置
-
 function usage {
     echo "${0##*/} -a|--artist 艺术家名称" >&2
     exit 1
 }
+
+DIR=~/dwhelper                  # 原来文件位置
+dest_dir=                       # 新位置
 
 # 根据参数确定文件夹名称
 if [[ -n $1 && -n $2 ]]; then
@@ -56,3 +56,5 @@ for file in $(find $DIR -regextype "posix-egrep" -regex ".*(mp4|mp3|ogg|avi|mkv)
 		mv --interactive "$orgin_name" "$dest_dir/${newname##*/}"
 	fi
 done
+
+exit

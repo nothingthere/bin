@@ -132,3 +132,5 @@ function play {
 }
 
 play
+
+exit
