@@ -1,0 +1,14 @@
+#!/bin/bash
+# 快速产看是否能联网
+# Author: Claudio <3261958605@qq.com>
+# Created: 2017-04-11 23:09:57
+# Commentary:
+# Code:
+
+if claudio_connected_to_internet_p; then
+    spd-say "yes, connected"
+else
+    spd-say "no, not connected"
+fi
+
+exit
