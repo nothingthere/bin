@@ -25,15 +25,14 @@ IP_REG=^"${GATEWAY%.*}".[0-9]{1,3}$
 
 # echo $IP_REG                    # TEST
 echo "Gateway: $GATEWAY"
-# echo $GATEWAY                   # TEST
 
 # 获取攻击目标的局域网IP
 target_ip=                    # 目标IP
 
 # 自动获取
 # echo ${GATEWAY%.*}              # TEST
-echo -e "正在生成所有局域网内所有客户端列表...\n"
-arp-scan ${GATEWAY%.*}.0/24 | grep -E '^([[:digit:]]{3}.){2}'
+# echo -e "正在生成所有局域网内所有客户端列表...\n"
+# arp-scan ${GATEWAY%.*}.0/24  --interface=eth0 | grep -E '^([[:digit:]]{3}.){2}'
 
 # echo "\$1：$1"                  # TEST
 if [[ -z "$target_ip" && -n "$1" && $1 =~ $IP_REG ]]; then
