@@ -36,8 +36,9 @@ for file in $(find $DIR -regextype "posix-egrep" -regex ".*(mp4|mp3|ogg|avi|mkv)
     # 去除艺术家名称
 	# newname=$(echo $newname | sed 's/-久石让//g')
 
-    # 去除括号
-	newname=$(echo $newname | sed -E 's/-\(\)//')
+    # 将左括号变为横线，去除右括号，（含中文和英文括号）
+    newname=$(echo $newname | tr '\(（' '-')
+	newname=$(echo $newname | sed -E 's/(\)|）)//g')
 
     # 删除所有新生成空格
     newname=$(echo $newname | tr --delete ' ')
