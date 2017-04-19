@@ -71,7 +71,7 @@ cd -
 ########################################
 # 2. 安装Emacs，以及相应依赖程序
 INSTALL emacs24 emacs24-common-non-dfsg emacs25 emacs25-common-non-dfsg\
-        silversearcher-ag aspell clang-format
+        silversearcher-ag aspell clang-format global
 ########################################
 
 ########################################
