@@ -32,3 +32,6 @@ alias e='emacs24 -nw'
 
 #支持Emacs命令行主题一致
 # export TERM=xterm-256color
+
+# python
+export PYTHONPATH=~/python:"$PYTHONPATH"
