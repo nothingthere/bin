@@ -1,0 +1,33 @@
+#!/bin/bash
+# 删除org文件中的RESULT缓存hash。
+#     #+RESULTS[c3319c1b2e270a5abe2b5217603d66b87fa428e5]: -> #+RESULTS:
+# Author: Claudio <3261958605@qq.com>
+# Created: 2017-05-02 17:50:47
+# Commentary:
+# Code:
+# 删除单个文集中的HASH
+function delete_file_hash {
+    local file=$1
+    sed -Ei 's/(#\+RESULTS).*(:)/\1\2/' $file
+    echo "$file"
+    return
+}
+
+# 删除文件夹中所有org文件中的HASH
+function delete_dir_hash {
+    local dir=$1
+    if [[ -f "$dir" && "$dir" =~ .*.org$ ]]; then
+        delete_file_hash $dir
+    elif [[ -d "$dir" ]]; then
+        for file in $dir/*; do
+            delete_dir_hash $file
+        done
+    fi
+    return
+}
+
+for i; do
+    delete_dir_hash $i
+done
+
+exit
