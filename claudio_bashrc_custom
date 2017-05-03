@@ -35,3 +35,6 @@ alias e='emacs24 -nw'
 
 # python
 export PYTHONPATH=~/python:"$PYTHONPATH"
+
+# the fuck
+eval "$(thefuck --alias)"
