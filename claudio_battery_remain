@@ -1,0 +1,17 @@
+#!/bin/bash
+# 查看电池剩余量
+# Author: Claudio <3261958605@qq.com>
+# Created: 2017-05-11 15:42:15
+# Commentary:
+# Code:
+CONFIG_FILE_PATH=/sys/class/power_supply/BAT1
+CHARGE_FULL=$(cat $CONFIG_FILE_PATH/charge_full)
+CHARGE_NOW=$(cat $CONFIG_FILE_PATH/charge_now)
+
+bc <<EOF
+scale=2
+remain = $CHARGE_NOW / $CHARGE_FULL * 100
+print remain,"%", "\n"
+EOF
+
+exit
