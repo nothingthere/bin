@@ -1,4 +1,5 @@
 #!/bin/bash
+
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 alias ll='ls -lht --reverse'
@@ -27,7 +28,7 @@ export PS4='$LINENO + '
 # Emacs
 alias e='emacs24 -nw'
 # 让emamcs图形界面支持中文输入
-# 加入此条配置后会使用Emacs中进入info模式下时出现费字符。
+# 加入此条配置后会使用Emacs中进入info模式下时出现废字符。
 # export LC_CTYPE=zh_CN.UTF-8
 
 #支持Emacs命令行主题一致
@@ -36,5 +37,6 @@ alias e='emacs24 -nw'
 # python
 export PYTHONPATH=~/python:"$PYTHONPATH"
 
+# 影响加载速度，暂时禁用
 # the fuck
 # eval "$(thefuck --alias)"
