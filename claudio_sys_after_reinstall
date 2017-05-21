@@ -92,6 +92,7 @@ post_message+=('手动下载sogou输入法.deb包，并安装：http://pinyin.so
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 INSTALL nodejs
 npm install gulp-cli --global
+config set registry 'https://registry.npm.taobao.org'
 ########################################
 
 ########################################

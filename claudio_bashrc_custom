@@ -20,7 +20,7 @@ alias gpush='git push origin master'
 alias gdiff='git diff'
 
 # 装逼，模仿《黑客军团》中将工具新建一个文件夹放入~/tools文件夹中
-export PATH=~/tools:"$PATH"
+export PATH=~/tools:~/python:"$PATH"
 
 # 使用bash -x参数时显示行号
 export PS4='$LINENO + '
