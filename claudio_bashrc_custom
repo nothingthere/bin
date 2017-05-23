@@ -36,6 +36,8 @@ alias e='emacs24 -nw'
 
 # python
 export PYTHONPATH=~/python:"$PYTHONPATH"
+alias python='python3'
+alias ipython='ipython3'
 
 # 影响加载速度，暂时禁用
 # the fuck
