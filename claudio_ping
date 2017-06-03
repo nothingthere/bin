@@ -18,7 +18,7 @@ function ping_until_connected {
 }
 
 if ping_until_connected; then
-    ping qq.com -c 1>& /dev/null
+    ping qq.com -c 1 -q # 1>& /dev/null
     echo $(claudio_color --color blue '成功连接广域网！')
     spd-say 'yes, connected to internet'
 fi

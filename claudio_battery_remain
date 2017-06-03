@@ -6,7 +6,7 @@
 # Code:
 CONFIG_FILE_PATH=/sys/class/power_supply/BAT1
 
-if [[ ! -f $CONFIG_FILE_PATH ]]; then
+if [[  ! (-e "$CONFIG_FILE_PATH") ]]; then
     echo '没有电池'
     exit 1
 fi

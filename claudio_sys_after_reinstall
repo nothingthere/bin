@@ -57,6 +57,7 @@ alias INSTALL='apt-get install --assume-yes'
 # 安装完成后的手动操作提示信息，使用数组
 declare -a post_message
 
+echo '耗时很长，看部电影吧。。。。。。。:)'
 ########################################
 # 1. 安装git，并简单配置
 INSTALL git
@@ -77,7 +78,7 @@ INSTALL emacs24 emacs24-common-non-dfsg emacs25 emacs25-common-non-dfsg\
 ########################################
 # 3. python3及pip3
 INSTALL python3 ipython3 python3-setuptools python3-pip python3-jedi pylint3
-pip3 install autopep8 isort django exifread PyMySQL
+pip3 install autopep8 isort django exifread PyMySQL jupyter
 # github3.py
 
 ########################################

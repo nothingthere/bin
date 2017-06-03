@@ -27,6 +27,8 @@ export PS4='$LINENO + '
 
 # Emacs
 alias e='emacs24 -nw'
+# export EDITOR='emacs24'
+
 # 让emamcs图形界面支持中文输入
 # 加入此条配置后会使用Emacs中进入info模式下时出现废字符。
 # export LC_CTYPE=zh_CN.UTF-8
@@ -35,10 +37,17 @@ alias e='emacs24 -nw'
 # export TERM=xterm-256color
 
 # python
-export PYTHONPATH=~/python:"$PYTHONPATH"
+# export PYTHONPATH=~/python:"$PYTHONPATH" #
+
+export PYTHONPATH=~/python:'/usr/lib/python35.zip':'/usr/lib/python3.5':'/usr/lib/python3.5/plat-x86_64-linux-gnu':'/usr/lib/python3.5/lib-dynload':'/usr/local/lib/python3.5/dist-packages':'/usr/lib/python3/dist-packages'
+
 alias python='python3'
 alias ipython='ipython3'
 
 # 影响加载速度，暂时禁用
 # the fuck
 # eval "$(thefuck --alias)"
+
+# 终端UI
+# export LINES=1000
+# export COLUMNS=1000
