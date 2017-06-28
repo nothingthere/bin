@@ -45,10 +45,10 @@ case $REPLY in
 esac
 
 # 跟新程序源
-if [[ (! $(apt-get update)) && $(uname --kernel-release) =~ '.*Kali.*' ]]; then
-    echo "软件源跟新失败，可能是Kali/etc/apt/sources.list的源不合适"
-    exit 1
-fi
+#if [[ (! $(apt-get update)) && $(uname --kernel-release) =~ '.*Kali.*' ]]; then
+#    echo "软件源跟新失败，可能是Kali/etc/apt/sources.list的源不合适"
+#    exit 1
+#fi
 
 # # 所有交互默认YES
 alias INSTALL='apt-get install --assume-yes'
@@ -73,17 +73,19 @@ cd -
 # 2. 安装Emacs，以及相应依赖程序
 INSTALL emacs24 emacs24-common-non-dfsg emacs25 emacs25-common-non-dfsg\
         silversearcher-ag aspell clang-format global
+
+# org->PDF https://github.com/wuyao721/51docs/blob/master/it/emacs-org-mode-pdf.org
 ########################################
 
 ########################################
 # 3. python3及pip3
 INSTALL python3 ipython3 python3-setuptools python3-pip python3-jedi pylint3
-pip3 install autopep8 isort django exifread PyMySQL jupyter
+pip3 install autopep8 isort exifread
 # github3.py
 
 ########################################
 # 4. 输入法
-INSTALL fcitx-table-wbpy fcitx-googlepinyin
+INSTALL fcitx fcitx-table-wbpy fcitx-googlepinyin
 post_message+=('在语言设置中讲键盘输入方式改为fcitx')
 post_message+=('手动下载sogou输入法.deb包，并安装：http://pinyin.sogou.com/linux/')
 ########################################
@@ -104,6 +106,7 @@ INSTALL golang
 ########################################
 # 7. 墙
 install_deb lantern 'https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-beta-64-bit.deb'
+
 ########################################
 
 ########################################
