@@ -64,6 +64,7 @@ INSTALL git
 cd ~claudio
 git config --global user.name 'nothingthere'
 git config --global user.email '3261958605@qq.com'
+git config --gloable core.quotepath false # 正常显示中文
 # ssh-keygen -t rsa -C '3261958605@qq.com'
 # post_message+=('需手动将~/.ssh/id_rsa.pub中的内容粘贴到GitHub的配置中。')
 cd -
@@ -105,8 +106,10 @@ INSTALL golang
 
 ########################################
 # 7. 墙
-install_deb lantern 'https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-beta-64-bit.deb'
+INSTALL libappindicator3-1      # lantern依赖
 
+install_deb lantern 'https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer-beta-64-bit.deb'
+INSALL chromium
 ########################################
 
 ########################################
