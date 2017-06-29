@@ -8,6 +8,7 @@ alias l='ls -CF'
 alias du='du --summarize --human-readable'
 
 # 文件夹切换
+alias bk='cd ..'
 alias bk1='cd ..'
 alias bk2='cd ../..'
 alias bk3='cd ../../..'
