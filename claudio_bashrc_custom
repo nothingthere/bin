@@ -38,9 +38,9 @@ alias e='emacs24 -nw'
 # export TERM=xterm-256color
 
 # python
-# export PYTHONPATH=~/python:"$PYTHONPATH" #
 
-export PYTHONPATH=~/python:'/usr/lib/python35.zip':'/usr/lib/python3.5':'/usr/lib/python3.5/plat-x86_64-linux-gnu':'/usr/lib/python3.5/lib-dynload':'/usr/local/lib/python3.5/dist-packages':'/usr/lib/python3/dist-packages'
+# 添加后只能加载某个版本的路径，还没找到解决办法
+# export PYTHONPATH=~/python:'/usr/lib/python35.zip':'/usr/lib/python3.5':'/usr/lib/python3.5/plat-x86_64-linux-gnu':'/usr/lib/python3.5/lib-dynload':'/usr/local/lib/python3.5/dist-packages':'/usr/lib/python3/dist-packages'
 
 alias python='python3'
 alias ipython='ipython3'
@@ -52,3 +52,14 @@ alias ipython='ipython3'
 # 终端UI
 # export LINES=1000
 # export COLUMNS=1000
+
+# powerline-status 除了美观以外，好像没有啥子卵用
+# 影响启动速度
+# if [[ -f `which powerline-daemon` ]];then
+#     powerline-daemon -q
+#     POWERLINE_BASH_CONTINUATION=1
+#     POWERLINE_BASH_SELECT=1
+#     # 为提高启动速度，手动获取添加到此次
+#     # . `pip3 show powerline-status | grep Location | cut -f 2 -d ' '`/powerline/bindings/bash/powerline.sh
+#     source /usr/local/lib/python3.5/dist-packages/powerline/bindings/bash/powerline.sh
+# fi

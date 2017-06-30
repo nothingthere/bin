@@ -127,6 +127,9 @@ INSTALL mplayer
 ########################################
 # 10. 其他
 INSTALL jq tree
+# powerline
+# pip3 install  git+git://github.com/Lokaltog/powerline
+
 ########################################
 
 # 输出手动信息
