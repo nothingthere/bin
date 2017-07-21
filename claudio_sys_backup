@@ -9,7 +9,7 @@ mkdir --parents ~/Backup
 echo $(claudio_color --color green "开始备份文件...")
 
 rsync --archive --quiet --delete  --compress --compress-level=9 \
-      ~/.ssh ~/.emacs.d ~/bin ~/python ~/Desktop ~/Documents ~/Music \
+      ~/.ssh ~/.emacs.d ~/bin ~/python ~/Desktop ~/clang ~/Documents ~/Music \
       ~/Backup/backup \
     && \
     echo $(claudio_color --color green "备份成功\n")

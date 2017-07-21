@@ -62,3 +62,7 @@ alias ipython='ipython3'
 #     # . `pip3 show powerline-status | grep Location | cut -f 2 -d ' '`/powerline/bindings/bash/powerline.sh
 #     source /usr/local/lib/python3.5/dist-packages/powerline/bindings/bash/powerline.sh
 # fi
+
+# clang路径配置
+export CPATH=~/clang/Strings:"$CPATH"
+export C_INCLUDE_PATH=~/clang/Strings:"$C_INCLUDE_PATH"
