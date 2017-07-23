@@ -27,6 +27,7 @@ export PS4='$LINENO + '
 
 # Emacs
 alias e='emacs24 -nw'
+
 # export EDITOR='emacs24'
 
 # 让emamcs图形界面支持中文输入
@@ -64,5 +65,10 @@ alias ipython='ipython3'
 # fi
 
 # clang路径配置
-export CPATH=~/clang/Strings:"$CPATH"
-export C_INCLUDE_PATH=~/clang/Strings:"$C_INCLUDE_PATH"
+# 只能修改默认头文件包含
+export CPATH=~/clang:~/clang/Strings:"$CPATH"
+# export C_INCLUDE_PATH=~/clang/Strings:"$C_INCLUDE_PATH"
+# export LIBRARY_PATH=~/claudio/clang/Strings:"$LIBRARY_PATH"
+# export COMPILER_PATH=~/claudio/clang/Strings:"$COMPILER_PATH"
+# export OBJC_INCLUDE_PATH=~/claudio/clang/Strings:"$OBJC_INCLUDE_PATH"
+alias valgrind='valgrind --track-origins=yes'
