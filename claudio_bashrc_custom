@@ -71,4 +71,4 @@ export CPATH=~/clang:~/clang/Strings:"$CPATH"
 # export LIBRARY_PATH=~/claudio/clang/Strings:"$LIBRARY_PATH"
 # export COMPILER_PATH=~/claudio/clang/Strings:"$COMPILER_PATH"
 # export OBJC_INCLUDE_PATH=~/claudio/clang/Strings:"$OBJC_INCLUDE_PATH"
-alias valgrind='valgrind --track-origins=yes'
+alias valgrind='valgrind --track-origins=yes --leak-check=full'
