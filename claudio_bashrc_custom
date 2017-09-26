@@ -26,9 +26,9 @@ export PATH=~/tools:~/python:~/bin:"$PATH"
 export PS4='$LINENO + '
 
 # Emacs
-alias e='emacs24 -nw'
+alias e='emacs -nw'
 
-# export EDITOR='emacs24'
+# export EDITOR='emacs'
 
 # 让emamcs图形界面支持中文输入
 # 加入此条配置后会使用Emacs中进入info模式下时出现废字符。

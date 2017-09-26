@@ -1,0 +1,21 @@
+#!/bin/bash
+# claudio_recall_repo.sh
+# Author: Claudio <3261958605@qq.com>
+# Created: 2017-09-26 08:31:20
+# Commentary: 召回github项目
+# Code:
+mkdir $1
+
+cd $1
+
+git init
+
+git pull https://github.com/nothingthere/$1.git master
+
+git remote add origin https://github.com/nothingthere/$1.git
+
+cd -
+
+echo "召回项目 $1 成功！"
+
+exit
